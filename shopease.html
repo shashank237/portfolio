@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShopEase — Shop Everything Online</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #08090f;
+    --surface: #12141f;
+    --surface2: #1c1f30;
+    --blue: #3d6fff;
+    --blue-light: #6b93ff;
+    --red: #ff4757;
+    --gold: #ffd32a;
+    --text: #e8eaf6;
+    --muted: #8890b5;
+    --border: rgba(255,255,255,0.07);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif; overflow-x:hidden; }
+
+  /* NAV */
+  nav { position:fixed; top:0; left:0; right:0; z-index:100; backdrop-filter:blur(20px); background:rgba(8,9,15,0.85); border-bottom:1px solid var(--border); padding:0 5%; height:64px; display:flex; align-items:center; justify-content:space-between; }
+  .logo { font-family:'Syne',sans-serif; font-weight:800; font-size:1.4rem; color:var(--blue-light); letter-spacing:-0.5px; }
+  .logo span { color:var(--red); }
+  .nav-links { display:flex; gap:2rem; list-style:none; }
+  .nav-links a { color:var(--muted); text-decoration:none; font-size:0.9rem; transition:color 0.2s; }
+  .nav-links a:hover { color:var(--text); }
+  .nav-right { display:flex; gap:1rem; align-items:center; }
+  .btn-nav { background:var(--red); color:#fff; border:none; padding:0.5rem 1.2rem; border-radius:8px; font-family:'DM Sans',sans-serif; font-size:0.85rem; font-weight:500; cursor:pointer; transition:opacity 0.2s; }
+  .btn-nav:hover { opacity:0.85; }
+  .cart-icon { position:relative; cursor:pointer; font-size:1.3rem; }
+  .cart-badge { position:absolute; top:-6px; right:-8px; background:var(--red); color:#fff; font-size:0.6rem; width:16px; height:16px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; }
+
+  /* HERO */
+  .hero { min-height:100vh; padding-top:64px; display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:4rem; padding-left:5%; padding-right:5%; position:relative; overflow:hidden; }
+  .hero::before { content:''; position:absolute; top:-200px; left:-200px; width:600px; height:600px; background:radial-gradient(circle, rgba(61,111,255,0.15) 0%, transparent 70%); pointer-events:none; }
+  .hero::after { content:''; position:absolute; bottom:-100px; right:10%; width:400px; height:400px; background:radial-gradient(circle, rgba(255,71,87,0.1) 0%, transparent 70%); pointer-events:none; }
+  .hero-tag { display:inline-flex; align-items:center; gap:0.5rem; background:rgba(61,111,255,0.15); border:1px solid rgba(61,111,255,0.3); color:var(--blue-light); padding:0.4rem 1rem; border-radius:100px; font-size:0.8rem; font-weight:500; margin-bottom:1.5rem; }
+  .hero-tag::before { content:''; width:8px; height:8px; background:var(--blue); border-radius:50%; animation:pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
+  .hero h1 { font-family:'Syne',sans-serif; font-size:clamp(2.5rem,5vw,4.2rem); font-weight:800; line-height:1.05; letter-spacing:-2px; margin-bottom:1.2rem; }
+  .hero h1 em { font-style:normal; color:var(--blue-light); }
+  .hero h1 .red { color:var(--red); }
+  .hero-sub { color:var(--muted); font-size:1.05rem; line-height:1.7; margin-bottom:2rem; max-width:480px; }
+  .hero-actions { display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:2.5rem; }
+  .btn-primary { background:var(--blue); color:#fff; border:none; padding:0.85rem 2rem; border-radius:12px; font-family:'DM Sans',sans-serif; font-size:1rem; font-weight:500; cursor:pointer; transition:transform 0.2s, box-shadow 0.2s; box-shadow:0 4px 30px rgba(61,111,255,0.4); }
+  .btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 40px rgba(61,111,255,0.5); }
+  .btn-outline { background:transparent; color:var(--text); border:1px solid var(--border); padding:0.85rem 2rem; border-radius:12px; font-family:'DM Sans',sans-serif; font-size:1rem; cursor:pointer; transition:border-color 0.2s, background 0.2s; }
+  .btn-outline:hover { background:var(--surface); border-color:var(--muted); }
+  .hero-stats { display:flex; gap:2.5rem; }
+  .stat-item { }
+  .stat-num { font-family:'Syne',sans-serif; font-size:1.6rem; font-weight:800; color:var(--text); }
+  .stat-label { font-size:0.8rem; color:var(--muted); margin-top:2px; }
+
+  /* Hero visual */
+  .hero-visual { position:relative; }
+  .hero-cards { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+  .hero-card { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:1.5rem; transition:transform 0.3s; cursor:pointer; }
+  .hero-card:hover { transform:translateY(-4px); }
+  .hero-card:first-child { grid-column:1/-1; background:linear-gradient(135deg,var(--blue) 0%,#5b40ff 100%); border-color:transparent; }
+  .card-icon { font-size:2rem; margin-bottom:0.8rem; }
+  .card-title { font-family:'Syne',sans-serif; font-weight:700; font-size:1rem; margin-bottom:0.3rem; }
+  .card-sub { font-size:0.8rem; color:rgba(255,255,255,0.7); }
+  .card-price { font-family:'Syne',sans-serif; font-size:1.4rem; font-weight:800; color:var(--gold); margin-top:0.5rem; }
+
+  /* CATEGORIES */
+  .section { padding:6rem 5%; }
+  .section-tag { font-size:0.8rem; font-weight:600; color:var(--blue); text-transform:uppercase; letter-spacing:2px; margin-bottom:0.8rem; }
+  .section-title { font-family:'Syne',sans-serif; font-size:clamp(1.8rem,3vw,2.8rem); font-weight:800; letter-spacing:-1px; margin-bottom:0.5rem; }
+  .section-sub { color:var(--muted); font-size:1rem; margin-bottom:3rem; }
+  .cats-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:1rem; }
+  .cat-card { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:2rem 1rem; text-align:center; cursor:pointer; transition:all 0.25s; }
+  .cat-card:hover { background:var(--blue); border-color:var(--blue); transform:translateY(-4px); }
+  .cat-card:hover .cat-name { color:#fff; }
+  .cat-card:hover .cat-count { color:rgba(255,255,255,0.7); }
+  .cat-icon { font-size:2.2rem; margin-bottom:0.8rem; }
+  .cat-name { font-family:'Syne',sans-serif; font-weight:700; font-size:0.95rem; margin-bottom:0.3rem; }
+  .cat-count { font-size:0.75rem; color:var(--muted); }
+
+  /* PRODUCTS */
+  .products-section { background:var(--surface); padding:6rem 5%; }
+  .products-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:3rem; }
+  .view-all { color:var(--blue); font-size:0.9rem; text-decoration:none; font-weight:500; }
+  .products-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:1.5rem; }
+  .prod-card { background:var(--bg); border:1px solid var(--border); border-radius:20px; overflow:hidden; transition:all 0.3s; cursor:pointer; }
+  .prod-card:hover { transform:translateY(-6px); box-shadow:0 20px 60px rgba(0,0,0,0.4); border-color:var(--blue); }
+  .prod-img { height:200px; display:flex; align-items:center; justify-content:center; font-size:4rem; position:relative; }
+  .prod-img.blue { background:linear-gradient(135deg,#1a2a5e,#2d4499); }
+  .prod-img.purple { background:linear-gradient(135deg,#2a1a5e,#4a2d99); }
+  .prod-img.green { background:linear-gradient(135deg,#1a3a2a,#2d6644); }
+  .prod-img.orange { background:linear-gradient(135deg,#3a2a1a,#7a4a20); }
+  .prod-badge { position:absolute; top:12px; left:12px; background:var(--red); color:#fff; font-size:0.7rem; font-weight:700; padding:0.25rem 0.6rem; border-radius:6px; }
+  .prod-wish { position:absolute; top:12px; right:12px; background:rgba(255,255,255,0.1); border:none; border-radius:8px; width:32px; height:32px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:1rem; transition:background 0.2s; }
+  .prod-wish:hover { background:rgba(255,71,87,0.3); }
+  .prod-info { padding:1.2rem; }
+  .prod-cat { font-size:0.75rem; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:0.4rem; }
+  .prod-name { font-family:'Syne',sans-serif; font-weight:700; font-size:1rem; margin-bottom:0.4rem; }
+  .prod-rating { display:flex; align-items:center; gap:0.4rem; font-size:0.8rem; color:var(--muted); margin-bottom:0.8rem; }
+  .stars { color:var(--gold); }
+  .prod-footer { display:flex; align-items:center; justify-content:space-between; }
+  .prod-price { font-family:'Syne',sans-serif; font-weight:800; font-size:1.2rem; color:var(--text); }
+  .prod-price .original { font-size:0.8rem; font-weight:400; color:var(--muted); text-decoration:line-through; margin-left:0.4rem; }
+  .btn-cart { background:var(--blue); color:#fff; border:none; padding:0.5rem 1rem; border-radius:8px; font-size:0.82rem; font-weight:500; cursor:pointer; font-family:'DM Sans',sans-serif; transition:opacity 0.2s; }
+  .btn-cart:hover { opacity:0.85; }
+
+  /* BANNER */
+  .banner { margin:6rem 5%; background:linear-gradient(135deg,var(--blue) 0%,#5b40ff 50%,var(--red) 100%); border-radius:24px; padding:4rem; display:grid; grid-template-columns:1fr auto; align-items:center; gap:2rem; }
+  .banner h2 { font-family:'Syne',sans-serif; font-size:clamp(1.6rem,3vw,2.4rem); font-weight:800; letter-spacing:-1px; margin-bottom:0.8rem; }
+  .banner p { opacity:0.85; margin-bottom:1.5rem; }
+  .btn-white { background:#fff; color:var(--blue); border:none; padding:0.85rem 2rem; border-radius:12px; font-family:'DM Sans',sans-serif; font-size:1rem; font-weight:600; cursor:pointer; transition:transform 0.2s; }
+  .btn-white:hover { transform:scale(1.03); }
+  .banner-emoji { font-size:6rem; }
+
+  /* TRUST */
+  .trust-section { padding:4rem 5%; border-top:1px solid var(--border); border-bottom:1px solid var(--border); display:grid; grid-template-columns:repeat(4,1fr); gap:2rem; }
+  .trust-item { text-align:center; }
+  .trust-icon { font-size:2rem; margin-bottom:0.8rem; }
+  .trust-title { font-family:'Syne',sans-serif; font-weight:700; font-size:0.95rem; margin-bottom:0.3rem; }
+  .trust-desc { font-size:0.8rem; color:var(--muted); }
+
+  /* FOOTER */
+  footer { padding:4rem 5% 2rem; }
+  .footer-top { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:3rem; margin-bottom:3rem; }
+  .footer-brand p { color:var(--muted); font-size:0.9rem; line-height:1.7; margin-top:1rem; max-width:280px; }
+  .footer-col h4 { font-family:'Syne',sans-serif; font-weight:700; margin-bottom:1rem; }
+  .footer-col ul { list-style:none; }
+  .footer-col li { margin-bottom:0.6rem; }
+  .footer-col a { color:var(--muted); text-decoration:none; font-size:0.88rem; transition:color 0.2s; }
+  .footer-col a:hover { color:var(--text); }
+  .footer-bottom { border-top:1px solid var(--border); padding-top:2rem; display:flex; justify-content:space-between; align-items:center; color:var(--muted); font-size:0.85rem; }
+
+  @media(max-width:768px) {
+    .hero { grid-template-columns:1fr; padding-top:80px; }
+    .hero-visual { display:none; }
+    .nav-links { display:none; }
+    .trust-section { grid-template-columns:1fr 1fr; }
+    .footer-top { grid-template-columns:1fr 1fr; }
+    .banner { grid-template-columns:1fr; }
+    .banner-emoji { display:none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Shop<span>Ease</span></div>
+  <ul class="nav-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Products</a></li>
+    <li><a href="#">Deals</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="cart-icon">🛒<span class="cart-badge">3</span></div>
+    <button class="btn-nav">Sign Up Free</button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-tag">🚀 Free Shipping on Orders above ₹499</div>
+    <h1>Everything You <em>Need</em>,<br>Delivered to Your <span class="red">Door.</span></h1>
+    <p class="hero-sub">Shop from over 10,000+ products across electronics, fashion, home décor, and more. Fast delivery, easy returns, and unbeatable prices.</p>
+    <div class="hero-actions">
+      <button class="btn-primary">Shop Now →</button>
+      <button class="btn-outline">View Today's Deals</button>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item"><div class="stat-num">10K+</div><div class="stat-label">Products</div></div>
+      <div class="stat-item"><div class="stat-num">50K+</div><div class="stat-label">Happy Customers</div></div>
+      <div class="stat-item"><div class="stat-num">4.9★</div><div class="stat-label">App Rating</div></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-cards">
+      <div class="hero-card">
+        <div class="card-icon">⚡</div>
+        <div class="card-title">Flash Sale — 60% Off</div>
+        <div class="card-sub">Electronics & Gadgets</div>
+        <div class="card-price">From ₹999</div>
+      </div>
+      <div class="hero-card">
+        <div class="card-icon">👟</div>
+        <div class="card-title">New Arrivals</div>
+        <div class="card-sub">Footwear Collection</div>
+      </div>
+      <div class="hero-card">
+        <div class="card-icon">🏠</div>
+        <div class="card-title">Home Decor</div>
+        <div class="card-sub">Refresh your space</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-tag">Browse by Category</div>
+  <div class="section-title">Shop by Category</div>
+  <p class="section-sub">Find exactly what you're looking for</p>
+  <div class="cats-grid">
+    <div class="cat-card"><div class="cat-icon">📱</div><div class="cat-name">Electronics</div><div class="cat-count">2,400+ items</div></div>
+    <div class="cat-card"><div class="cat-icon">👗</div><div class="cat-name">Fashion</div><div class="cat-count">3,800+ items</div></div>
+    <div class="cat-card"><div class="cat-icon">🏠</div><div class="cat-name">Home Decor</div><div class="cat-count">1,200+ items</div></div>
+    <div class="cat-card"><div class="cat-icon">💄</div><div class="cat-name">Beauty</div><div class="cat-count">890+ items</div></div>
+    <div class="cat-card"><div class="cat-icon">📚</div><div class="cat-name">Books</div><div class="cat-count">5,000+ items</div></div>
+    <div class="cat-card"><div class="cat-icon">🎮</div><div class="cat-name">Gaming</div><div class="cat-count">680+ items</div></div>
+    <div class="cat-card"><div class="cat-icon">🧸</div><div class="cat-name">Toys & Kids</div><div class="cat-count">1,100+ items</div></div>
+    <div class="cat-card"><div class="cat-icon">🏋️</div><div class="cat-name">Sports</div><div class="cat-count">760+ items</div></div>
+  </div>
+</section>
+
+<section class="products-section">
+  <div class="products-header">
+    <div>
+      <div class="section-tag">Handpicked for You</div>
+      <div class="section-title">Featured Products</div>
+    </div>
+    <a href="#" class="view-all">View All Products →</a>
+  </div>
+  <div class="products-grid">
+    <div class="prod-card">
+      <div class="prod-img blue"><span class="prod-badge">-35%</span><button class="prod-wish">♡</button>🎧</div>
+      <div class="prod-info">
+        <div class="prod-cat">Electronics</div>
+        <div class="prod-name">Pro Wireless Headphones</div>
+        <div class="prod-rating"><span class="stars">★★★★★</span> 4.9 (2.1k reviews)</div>
+        <div class="prod-footer"><div class="prod-price">₹2,499<span class="original">₹3,849</span></div><button class="btn-cart">Add to Cart</button></div>
+      </div>
+    </div>
+    <div class="prod-card">
+      <div class="prod-img purple"><button class="prod-wish">♥</button>👟</div>
+      <div class="prod-info">
+        <div class="prod-cat">Footwear</div>
+        <div class="prod-name">Ultra Running Shoes</div>
+        <div class="prod-rating"><span class="stars">★★★★☆</span> 4.6 (890 reviews)</div>
+        <div class="prod-footer"><div class="prod-price">₹3,199</div><button class="btn-cart">Add to Cart</button></div>
+      </div>
+    </div>
+    <div class="prod-card">
+      <div class="prod-img green"><span class="prod-badge">New</span><button class="prod-wish">♡</button>⌚</div>
+      <div class="prod-info">
+        <div class="prod-cat">Electronics</div>
+        <div class="prod-name">Smart Fitness Watch</div>
+        <div class="prod-rating"><span class="stars">★★★★★</span> 4.8 (1.4k reviews)</div>
+        <div class="prod-footer"><div class="prod-price">₹8,999<span class="original">₹12,000</span></div><button class="btn-cart">Add to Cart</button></div>
+      </div>
+    </div>
+    <div class="prod-card">
+      <div class="prod-img orange"><button class="prod-wish">♡</button>👜</div>
+      <div class="prod-info">
+        <div class="prod-cat">Fashion</div>
+        <div class="prod-name">Leather Tote Bag</div>
+        <div class="prod-rating"><span class="stars">★★★★☆</span> 4.5 (430 reviews)</div>
+        <div class="prod-footer"><div class="prod-price">₹1,799</div><button class="btn-cart">Add to Cart</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="banner">
+  <div>
+    <h2>Get 20% Off Your First Order!</h2>
+    <p>Sign up today and unlock exclusive deals, early access to sales, and personalized recommendations.</p>
+    <button class="btn-white">Claim Your Discount →</button>
+  </div>
+  <div class="banner-emoji">🎁</div>
+</div>
+
+<div class="trust-section">
+  <div class="trust-item"><div class="trust-icon">🚚</div><div class="trust-title">Free Delivery</div><div class="trust-desc">On orders above ₹499</div></div>
+  <div class="trust-item"><div class="trust-icon">↩️</div><div class="trust-title">Easy Returns</div><div class="trust-desc">15-day hassle-free returns</div></div>
+  <div class="trust-item"><div class="trust-icon">🔒</div><div class="trust-title">Secure Payments</div><div class="trust-desc">100% safe checkout</div></div>
+  <div class="trust-item"><div class="trust-icon">🎧</div><div class="trust-title">24/7 Support</div><div class="trust-desc">We're always here</div></div>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="logo">Shop<span style="color:var(--red)">Ease</span></div>
+      <p>Your one-stop shop for everything. Quality products, fast delivery, and unbeatable customer service.</p>
+    </div>
+    <div class="footer-col"><h4>Shop</h4><ul><li><a href="#">Electronics</a></li><li><a href="#">Fashion</a></li><li><a href="#">Home Decor</a></li><li><a href="#">Beauty</a></li></ul></div>
+    <div class="footer-col"><h4>Help</h4><ul><li><a href="#">FAQs</a></li><li><a href="#">Track Order</a></li><li><a href="#">Returns</a></li><li><a href="#">Contact</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="#">About Us</a></li><li><a href="#">Careers</a></li><li><a href="#">Blog</a></li><li><a href="#">Press</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 ShopEase. All rights reserved.</span><span>Privacy Policy · Terms of Service</span></div>
+</footer>
+
+</body>
+</html>
