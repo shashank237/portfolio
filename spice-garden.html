@@ -4,174 +4,211 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Spice Garden — Authentic Indian Cuisine</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500;1,700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0f0800;
-    --surface: #1a1000;
-    --orange: #e8681a;
-    --orange-light: #f5a623;
-    --cream: #f5ead8;
-    --warm: #c4956a;
-    --text: #f0e6d3;
-    --muted: #8a7560;
-    --border: rgba(200,140,80,0.15);
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  html { scroll-behavior:smooth; }
-  body { background:var(--bg); color:var(--text); font-family:'Jost',sans-serif; overflow-x:hidden; }
+:root{--bg:#0f0800;--surface:#1a1000;--surface2:#261800;--orange:#e8681a;--orange-l:#f5a623;--cream:#f5ead8;--warm:#c4956a;--text:#f0e6d3;--muted:#8a7560;--border:rgba(200,140,80,0.15);}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Jost',sans-serif;overflow-x:hidden;}
 
-  /* NAV */
-  nav { position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(15,8,0,0.9); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); padding:0 6%; height:70px; display:flex; align-items:center; justify-content:space-between; }
-  .logo { font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:700; color:var(--orange-light); letter-spacing:0.5px; }
-  .logo-sub { font-size:0.65rem; font-family:'Jost',sans-serif; letter-spacing:3px; color:var(--warm); display:block; text-transform:uppercase; }
-  .nav-links { display:flex; gap:2.5rem; list-style:none; }
-  .nav-links a { color:var(--warm); text-decoration:none; font-size:0.88rem; letter-spacing:0.5px; transition:color 0.2s; font-weight:500; }
-  .nav-links a:hover { color:var(--orange-light); }
-  .btn-reserve { background:var(--orange); color:#fff; border:none; padding:0.6rem 1.5rem; border-radius:6px; font-family:'Jost',sans-serif; font-weight:600; font-size:0.85rem; letter-spacing:0.5px; cursor:pointer; transition:background 0.2s; }
-  .btn-reserve:hover { background:var(--orange-light); }
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(15,8,0,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 6%;height:70px;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--orange-l);text-decoration:none;}
+.logo-sub{font-size:.62rem;font-family:'Jost',sans-serif;letter-spacing:3px;color:var(--warm);display:block;text-transform:uppercase;}
+.nav-links{display:flex;gap:2.5rem;list-style:none;}
+.nav-links a{color:var(--warm);text-decoration:none;font-size:.88rem;letter-spacing:.5px;transition:color .2s;font-weight:500;}
+.nav-links a:hover{color:var(--orange-l);}
+.nav-right{display:flex;gap:1rem;align-items:center;}
+.btn-reserve{background:var(--orange);color:#fff;border:none;padding:.6rem 1.5rem;border-radius:6px;font-family:'Jost',sans-serif;font-weight:600;font-size:.85rem;cursor:pointer;transition:background .2s;}
+.btn-reserve:hover{background:var(--orange-l);}
+.order-count{background:var(--orange-l);color:#0f0800;font-size:.72rem;font-weight:800;width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;margin-left:.3rem;}
 
-  /* HERO */
-  .hero { min-height:100vh; padding-top:70px; display:flex; align-items:center; position:relative; overflow:hidden; }
-  .hero-bg { position:absolute; inset:0; background:linear-gradient(135deg, #0f0800 0%, #1f0e00 40%, #0f0800 100%); }
-  .hero-pattern { position:absolute; inset:0; opacity:0.04; background-image:repeating-linear-gradient(45deg, var(--orange) 0, var(--orange) 1px, transparent 0, transparent 50%); background-size:20px 20px; }
-  .hero-glow { position:absolute; right:5%; top:50%; transform:translateY(-50%); width:500px; height:500px; background:radial-gradient(circle, rgba(232,104,26,0.2) 0%, transparent 65%); }
-  .hero-content { position:relative; padding:0 6%; max-width:700px; }
-  .hero-eyebrow { display:inline-flex; align-items:center; gap:0.8rem; margin-bottom:2rem; }
-  .eyebrow-line { width:40px; height:1px; background:var(--orange); }
-  .eyebrow-text { font-size:0.8rem; letter-spacing:4px; text-transform:uppercase; color:var(--orange); font-weight:600; }
-  .hero h1 { font-family:'Playfair Display',serif; font-size:clamp(3rem,6vw,5.5rem); font-weight:900; line-height:1; letter-spacing:-1px; margin-bottom:1.5rem; }
-  .hero h1 em { font-style:italic; color:var(--orange-light); }
-  .hero h1 .script { color:var(--warm); }
-  .hero-desc { color:var(--warm); font-size:1.05rem; line-height:1.8; margin-bottom:2.5rem; font-weight:300; max-width:500px; }
-  .hero-actions { display:flex; gap:1.2rem; flex-wrap:wrap; margin-bottom:3rem; }
-  .btn-primary { background:var(--orange); color:#fff; border:none; padding:1rem 2.2rem; border-radius:8px; font-family:'Jost',sans-serif; font-size:1rem; font-weight:600; letter-spacing:0.5px; cursor:pointer; transition:all 0.25s; }
-  .btn-primary:hover { background:var(--orange-light); transform:translateY(-2px); }
-  .btn-ghost { background:transparent; color:var(--cream); border:1px solid var(--border); padding:1rem 2.2rem; border-radius:8px; font-family:'Jost',sans-serif; font-size:1rem; cursor:pointer; transition:all 0.25s; letter-spacing:0.5px; }
-  .btn-ghost:hover { border-color:var(--orange); color:var(--orange-light); }
-  .hero-rating { display:flex; align-items:center; gap:1.5rem; }
-  .rating-stars { font-size:1.2rem; color:var(--orange-light); }
-  .rating-text { font-size:0.85rem; color:var(--muted); }
-  .rating-text strong { color:var(--cream); }
-  .hero-dishes { position:absolute; right:4%; top:50%; transform:translateY(-40%); display:flex; flex-direction:column; gap:1rem; }
-  .dish-card { background:rgba(30,15,0,0.9); border:1px solid var(--border); border-radius:16px; padding:1.2rem 1.5rem; display:flex; align-items:center; gap:1rem; backdrop-filter:blur(10px); width:220px; transition:transform 0.3s; cursor:pointer; }
-  .dish-card:hover { transform:translateX(-4px); }
-  .dish-emoji { font-size:2rem; }
-  .dish-name { font-family:'Playfair Display',serif; font-weight:700; font-size:0.95rem; margin-bottom:0.2rem; }
-  .dish-price { font-size:0.8rem; color:var(--orange); font-weight:600; }
+/* ORDER DRAWER */
+.order-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:800;opacity:0;pointer-events:none;transition:opacity .3s;}
+.order-overlay.open{opacity:1;pointer-events:all;}
+.order-drawer{position:fixed;top:0;right:-440px;width:420px;max-width:100vw;height:100vh;background:var(--surface);z-index:900;padding:2rem;display:flex;flex-direction:column;transition:right .35s cubic-bezier(.4,0,.2,1);border-left:1px solid var(--border);}
+.order-drawer.open{right:0;}
+.od-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--border);}
+.od-head h3{font-family:'Playfair Display',serif;font-size:1.2rem;}
+.close-od{background:transparent;border:1px solid var(--border);color:var(--text);width:34px;height:34px;border-radius:6px;cursor:pointer;font-size:1rem;transition:background .2s;}
+.close-od:hover{background:var(--surface2);}
+.order-items{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:.8rem;}
+.order-empty{text-align:center;color:var(--muted);margin:auto;padding:2rem;}
+.order-empty .ei{font-size:3rem;display:block;margin-bottom:1rem;}
+.order-item{display:flex;gap:.8rem;align-items:center;background:var(--surface2);border-radius:10px;padding:.8rem;}
+.oi-emoji{font-size:2rem;flex-shrink:0;}
+.oi-info{flex:1;}
+.oi-name{font-weight:600;font-size:.9rem;margin-bottom:.2rem;}
+.oi-price{color:var(--orange-l);font-weight:700;font-size:.88rem;}
+.oi-qty{display:flex;align-items:center;gap:.4rem;margin-top:.3rem;}
+.q-btn{background:var(--surface);border:1px solid var(--border);color:var(--text);width:24px;height:24px;border-radius:5px;cursor:pointer;font-size:.9rem;}
+.q-btn:hover{background:var(--orange);border-color:var(--orange);}
+.q-num{font-size:.85rem;font-weight:700;min-width:16px;text-align:center;}
+.oi-remove{background:transparent;border:none;color:var(--muted);cursor:pointer;font-size:1rem;transition:color .2s;}
+.oi-remove:hover{color:var(--orange);}
+.order-foot{border-top:1px solid var(--border);padding-top:1.2rem;margin-top:.5rem;}
+.order-total{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;}
+.order-total span{font-size:1rem;}
+.order-total strong{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--orange-l);}
+.btn-place{width:100%;background:var(--orange);color:#fff;border:none;padding:.95rem;border-radius:10px;font-family:'Playfair Display',serif;font-weight:700;font-size:1rem;cursor:pointer;transition:all .2s;}
+.btn-place:hover{background:var(--orange-l);transform:translateY(-2px);}
 
-  /* STATS */
-  .stats-bar { background:var(--surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:2.5rem 6%; display:grid; grid-template-columns:repeat(4,1fr); gap:2rem; }
-  .stat-item { text-align:center; }
-  .stat-num { font-family:'Playfair Display',serif; font-size:2.2rem; font-weight:900; color:var(--orange-light); }
-  .stat-label { font-size:0.8rem; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-top:0.3rem; font-weight:500; }
+/* TOAST */
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--surface);border:1px solid var(--orange);color:var(--text);padding:.8rem 1.4rem;border-radius:10px;font-weight:600;font-size:.88rem;z-index:9999;transform:translateY(100px);opacity:0;transition:all .35s;box-shadow:0 8px 30px rgba(0,0,0,.5);}
+.toast.show{transform:translateY(0);opacity:1;}
 
-  /* MENU */
-  .menu-section { padding:7rem 6%; }
-  .section-header { text-align:center; margin-bottom:4rem; }
-  .section-eyebrow { font-size:0.8rem; letter-spacing:4px; text-transform:uppercase; color:var(--orange); font-weight:600; margin-bottom:1rem; display:flex; align-items:center; justify-content:center; gap:1rem; }
-  .section-eyebrow::before, .section-eyebrow::after { content:''; flex:1; max-width:60px; height:1px; background:var(--orange); opacity:0.5; }
-  .section-title { font-family:'Playfair Display',serif; font-size:clamp(2rem,4vw,3.5rem); font-weight:900; letter-spacing:-1px; }
-  .section-title em { font-style:italic; color:var(--orange-light); }
-  .menu-tabs { display:flex; gap:0; justify-content:center; margin-bottom:3rem; background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:4px; width:fit-content; margin-left:auto; margin-right:auto; }
-  .tab { padding:0.6rem 1.5rem; border:none; background:transparent; color:var(--muted); font-family:'Jost',sans-serif; font-size:0.88rem; cursor:pointer; border-radius:7px; transition:all 0.2s; font-weight:500; letter-spacing:0.3px; }
-  .tab.active { background:var(--orange); color:#fff; }
-  .menu-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:1.5rem; }
-  .menu-card { background:var(--surface); border:1px solid var(--border); border-radius:20px; overflow:hidden; transition:all 0.3s; cursor:pointer; }
-  .menu-card:hover { transform:translateY(-6px); box-shadow:0 20px 60px rgba(232,104,26,0.15); border-color:rgba(232,104,26,0.3); }
-  .menu-img { height:180px; display:flex; align-items:center; justify-content:center; font-size:4.5rem; position:relative; }
-  .menu-img.c1 { background:linear-gradient(135deg,#2a0e00,#5a2000); }
-  .menu-img.c2 { background:linear-gradient(135deg,#1a0e00,#3a2000); }
-  .menu-img.c3 { background:linear-gradient(135deg,#0e1a00,#203a00); }
-  .menu-img.c4 { background:linear-gradient(135deg,#1a001a,#3a003a); }
-  .veg-badge { position:absolute; top:12px; left:12px; background:rgba(50,180,50,0.2); border:1px solid rgba(50,180,50,0.5); border-radius:4px; padding:0.2rem 0.5rem; font-size:0.7rem; color:#8eff8e; font-weight:600; }
-  .spice-level { position:absolute; top:12px; right:12px; font-size:0.85rem; }
-  .menu-info { padding:1.3rem; }
-  .menu-name { font-family:'Playfair Display',serif; font-weight:700; font-size:1.15rem; margin-bottom:0.4rem; }
-  .menu-desc { font-size:0.82rem; color:var(--muted); line-height:1.6; margin-bottom:1rem; font-weight:300; }
-  .menu-footer { display:flex; align-items:center; justify-content:space-between; }
-  .menu-price { font-family:'Playfair Display',serif; font-weight:700; font-size:1.2rem; color:var(--orange-light); }
-  .btn-order { background:transparent; border:1px solid var(--orange); color:var(--orange); padding:0.45rem 1rem; border-radius:6px; font-family:'Jost',sans-serif; font-size:0.82rem; cursor:pointer; transition:all 0.2s; font-weight:500; }
-  .btn-order:hover { background:var(--orange); color:#fff; }
+/* HERO */
+.hero{min-height:100vh;padding-top:70px;position:relative;overflow:hidden;display:flex;align-items:center;}
+.hero-bg-img{position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=1600&q=80');background-size:cover;background-position:center;filter:brightness(.35);}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,8,0,.9) 50%,rgba(15,8,0,.2));}
+.hero-content{position:relative;padding:0 6%;max-width:640px;z-index:1;}
+.hero-eyebrow{display:flex;align-items:center;gap:.8rem;margin-bottom:2rem;}
+.eyebrow-line{width:40px;height:1px;background:var(--orange);}
+.eyebrow-text{font-size:.8rem;letter-spacing:4px;text-transform:uppercase;color:var(--orange);font-weight:600;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,6vw,5rem);font-weight:900;line-height:1;letter-spacing:-1px;margin-bottom:1.5rem;}
+.hero h1 em{font-style:italic;color:var(--orange-l);}
+.hero-desc{color:var(--warm);font-size:1rem;line-height:1.8;margin-bottom:2.5rem;font-weight:300;}
+.hero-actions{display:flex;gap:1.2rem;flex-wrap:wrap;margin-bottom:3rem;}
+.btn-primary{background:var(--orange);color:#fff;border:none;padding:1rem 2.2rem;border-radius:8px;font-family:'Jost',sans-serif;font-size:1rem;font-weight:600;cursor:pointer;transition:all .25s;}
+.btn-primary:hover{background:var(--orange-l);transform:translateY(-2px);}
+.btn-ghost{background:transparent;color:var(--cream);border:1px solid var(--border);padding:1rem 2.2rem;border-radius:8px;font-family:'Jost',sans-serif;font-size:1rem;cursor:pointer;transition:all .25s;}
+.btn-ghost:hover{border-color:var(--orange);color:var(--orange-l);}
+.hero-rating{display:flex;align-items:center;gap:1.5rem;}
+.rating-stars{color:var(--orange-l);font-size:1.2rem;}
+.rating-text{font-size:.85rem;color:var(--muted);}
+.rating-text strong{color:var(--cream);}
 
-  /* RESERVATION */
-  .reservation-section { background:var(--surface); padding:7rem 6%; }
-  .reservation-inner { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
-  .res-text h2 { font-family:'Playfair Display',serif; font-size:clamp(2rem,3.5vw,3rem); font-weight:900; letter-spacing:-1px; line-height:1.1; margin-bottom:1.2rem; }
-  .res-text h2 em { font-style:italic; color:var(--orange-light); }
-  .res-text p { color:var(--warm); font-size:1rem; line-height:1.8; margin-bottom:2rem; font-weight:300; }
-  .res-features { list-style:none; display:flex; flex-direction:column; gap:0.8rem; }
-  .res-features li { display:flex; align-items:center; gap:0.8rem; font-size:0.9rem; color:var(--warm); }
-  .res-features li::before { content:'✦'; color:var(--orange); font-size:0.7rem; }
-  .res-form { background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:20px; padding:2.5rem; }
-  .form-title { font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:700; margin-bottom:2rem; }
-  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem; }
-  .form-group { display:flex; flex-direction:column; gap:0.5rem; }
-  .form-group label { font-size:0.8rem; letter-spacing:1px; text-transform:uppercase; color:var(--muted); font-weight:600; }
-  .form-group input, .form-group select { background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:0.8rem 1rem; color:var(--text); font-family:'Jost',sans-serif; font-size:0.92rem; outline:none; transition:border-color 0.2s; }
-  .form-group input:focus, .form-group select:focus { border-color:var(--orange); }
-  .form-group select option { background:var(--bg); }
-  .btn-submit { width:100%; background:var(--orange); color:#fff; border:none; padding:1rem; border-radius:10px; font-family:'Jost',sans-serif; font-size:1rem; font-weight:600; letter-spacing:0.5px; cursor:pointer; margin-top:1rem; transition:all 0.25s; }
-  .btn-submit:hover { background:var(--orange-light); transform:translateY(-2px); }
+/* STATS */
+.stats-bar{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:2.5rem 6%;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;}
+.stat-item{text-align:center;}
+.stat-num{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;color:var(--orange-l);}
+.stat-label{font-size:.78rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:.3rem;}
 
-  /* FOOTER */
-  footer { padding:4rem 6% 2rem; border-top:1px solid var(--border); }
-  .footer-inner { display:grid; grid-template-columns:2fr 1fr 1fr; gap:3rem; margin-bottom:3rem; }
-  .footer-brand .logo { display:block; margin-bottom:1rem; }
-  .footer-brand p { color:var(--muted); font-size:0.88rem; line-height:1.8; max-width:280px; font-weight:300; }
-  .footer-col h4 { font-family:'Playfair Display',serif; font-size:1rem; margin-bottom:1.2rem; color:var(--cream); }
-  .footer-col ul { list-style:none; }
-  .footer-col li { margin-bottom:0.7rem; }
-  .footer-col a { color:var(--muted); text-decoration:none; font-size:0.88rem; transition:color 0.2s; }
-  .footer-col a:hover { color:var(--orange-light); }
-  .footer-bottom { border-top:1px solid var(--border); padding-top:2rem; display:flex; justify-content:space-between; color:var(--muted); font-size:0.82rem; }
+/* MENU */
+.menu-section{padding:7rem 6%;}
+.section-header{text-align:center;margin-bottom:3rem;}
+.section-eyebrow{font-size:.78rem;letter-spacing:4px;text-transform:uppercase;color:var(--orange);font-weight:600;margin-bottom:1rem;display:flex;align-items:center;justify-content:center;gap:1rem;}
+.section-eyebrow::before,.section-eyebrow::after{content:'';flex:1;max-width:60px;height:1px;background:var(--orange);opacity:.5;}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:900;letter-spacing:-1px;}
+.section-title em{font-style:italic;color:var(--orange-l);}
+.menu-tabs{display:flex;gap:0;justify-content:center;margin-bottom:3rem;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:4px;width:fit-content;margin-left:auto;margin-right:auto;}
+.tab{padding:.6rem 1.5rem;border:none;background:transparent;color:var(--muted);font-family:'Jost',sans-serif;font-size:.88rem;cursor:pointer;border-radius:7px;transition:all .2s;font-weight:500;}
+.tab.active{background:var(--orange);color:#fff;}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;}
+.menu-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:all .3s;cursor:pointer;}
+.menu-card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(232,104,26,.15);border-color:rgba(232,104,26,.3);}
+.menu-img{width:100%;height:200px;object-fit:cover;display:block;transition:transform .4s;}
+.menu-card:hover .menu-img{transform:scale(1.05);}
+.menu-img-wrap{position:relative;overflow:hidden;}
+.veg-badge{position:absolute;top:12px;left:12px;padding:.25rem .6rem;border-radius:5px;font-size:.72rem;font-weight:700;}
+.veg{background:rgba(50,180,50,.2);border:1px solid rgba(50,180,50,.5);color:#7eff7e;}
+.nonveg{background:rgba(232,104,26,.2);border:1px solid rgba(232,104,26,.4);color:var(--orange-l);}
+.spice-level{position:absolute;top:12px;right:12px;font-size:.85rem;}
+.menu-info{padding:1.3rem;}
+.menu-name{font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;margin-bottom:.4rem;}
+.menu-desc{font-size:.82rem;color:var(--muted);line-height:1.6;margin-bottom:1rem;font-weight:300;}
+.menu-footer{display:flex;align-items:center;justify-content:space-between;}
+.menu-price{font-family:'Playfair Display',serif;font-weight:700;font-size:1.2rem;color:var(--orange-l);}
+.btn-add-food{background:transparent;border:1px solid var(--orange);color:var(--orange);padding:.45rem 1rem;border-radius:6px;font-family:'Jost',sans-serif;font-size:.82rem;cursor:pointer;transition:all .2s;font-weight:600;}
+.btn-add-food:hover,.btn-add-food.added{background:var(--orange);color:#fff;}
 
-  @media(max-width:768px) {
-    .hero { flex-direction:column; text-align:center; }
-    .hero-dishes { display:none; }
-    .nav-links { display:none; }
-    .stats-bar { grid-template-columns:1fr 1fr; }
-    .reservation-inner { grid-template-columns:1fr; }
-    .footer-inner { grid-template-columns:1fr; }
-    .form-row { grid-template-columns:1fr; }
-  }
+/* GALLERY */
+.gallery-section{padding:0 6% 7rem;}
+.gallery-grid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:200px 200px;gap:.8rem;}
+.gal-img{border-radius:16px;overflow:hidden;}
+.gal-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;}
+.gal-img:hover img{transform:scale(1.05);}
+.gal-img:first-child{grid-row:1/3;}
+
+/* RESERVATION */
+.reservation-section{background:var(--surface);padding:7rem 6%;}
+.res-inner{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;}
+.res-img{border-radius:24px;overflow:hidden;height:100%;min-height:400px;}
+.res-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.res-form-wrap{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:20px;padding:2.5rem;}
+.form-title{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;margin-bottom:2rem;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;}
+.form-group{display:flex;flex-direction:column;gap:.5rem;}
+.form-group.full{grid-column:1/-1;}
+.form-group label{font-size:.78rem;letter-spacing:1px;text-transform:uppercase;color:var(--muted);font-weight:600;}
+.form-group input,.form-group select,.form-group textarea{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:.8rem 1rem;color:var(--text);font-family:'Jost',sans-serif;font-size:.9rem;outline:none;transition:border-color .2s;resize:none;}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--orange);}
+.form-group select option{background:var(--bg);}
+.btn-submit{width:100%;background:var(--orange);color:#fff;border:none;padding:1rem;border-radius:10px;font-family:'Jost',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;margin-top:1rem;transition:all .25s;}
+.btn-submit:hover{background:var(--orange-l);transform:translateY(-2px);}
+.success-msg{display:none;background:rgba(46,204,113,.15);border:1px solid rgba(46,204,113,.3);border-radius:10px;padding:1rem;text-align:center;color:#7eff7e;margin-top:1rem;font-weight:600;}
+
+/* TESTIMONIALS */
+.testimonials{padding:7rem 6%;}
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;margin-top:3rem;}
+.testi-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.8rem;}
+.testi-stars{color:var(--orange-l);font-size:1rem;margin-bottom:.8rem;}
+.testi-text{font-size:.9rem;color:var(--warm);line-height:1.7;margin-bottom:1.2rem;font-weight:300;font-style:italic;}
+.testi-author{display:flex;align-items:center;gap:.8rem;}
+.testi-avatar{width:40px;height:40px;border-radius:50%;object-fit:cover;}
+.testi-name{font-weight:600;font-size:.9rem;}
+.testi-loc{font-size:.78rem;color:var(--muted);}
+
+footer{padding:4rem 6% 2rem;border-top:1px solid var(--border);}
+.footer-inner{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;margin-bottom:3rem;}
+.footer-brand .logo{display:block;margin-bottom:1rem;}
+.footer-brand p{color:var(--muted);font-size:.88rem;line-height:1.8;max-width:280px;font-weight:300;}
+.footer-col h4{font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:1.2rem;color:var(--cream);}
+.footer-col ul{list-style:none;}
+.footer-col li{margin-bottom:.7rem;}
+.footer-col a{color:var(--muted);text-decoration:none;font-size:.88rem;transition:color .2s;}
+.footer-col a:hover{color:var(--orange-l);}
+.footer-bottom{border-top:1px solid var(--border);padding-top:2rem;display:flex;justify-content:space-between;color:var(--muted);font-size:.82rem;}
+@media(max-width:768px){.res-inner{grid-template-columns:1fr;}.res-img{min-height:250px;}.nav-links{display:none;}.stats-bar{grid-template-columns:1fr 1fr;}.footer-inner{grid-template-columns:1fr;}.gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto;}.gal-img:first-child{grid-column:1/-1;grid-row:auto;}.form-row{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
 
+<div class="order-overlay" id="orderOverlay" onclick="toggleOrder()"></div>
+<div class="order-drawer" id="orderDrawer">
+  <div class="od-head">
+    <h3>🍽️ Your Order (<span id="orderCountInner">0</span>)</h3>
+    <button class="close-od" onclick="toggleOrder()">✕</button>
+  </div>
+  <div class="order-items" id="orderItems">
+    <div class="order-empty"><span class="ei">🍛</span>No items yet.<br><span style="font-size:.85rem;">Add dishes from our menu!</span></div>
+  </div>
+  <div class="order-foot" id="orderFoot" style="display:none;">
+    <div class="order-total"><span>Total Amount</span><strong id="orderTotal">₹0</strong></div>
+    <button class="btn-place" onclick="placeOrder()">Place Order →</button>
+  </div>
+</div>
+
+<div class="toast" id="toast">✅ Added!</div>
+
 <nav>
-  <div class="logo">Spice Garden<span class="logo-sub">Authentic Indian Cuisine</span></div>
+  <a class="logo" href="#">Spice Garden<span class="logo-sub">Authentic Indian Cuisine</span></a>
   <ul class="nav-links">
-    <li><a href="#">Home</a></li>
-    <li><a href="#">Menu</a></li>
-    <li><a href="#">Reservations</a></li>
-    <li><a href="#">About</a></li>
-    <li><a href="#">Contact</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#reservation">Reserve</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
   </ul>
-  <button class="btn-reserve">Reserve a Table</button>
+  <div class="nav-right">
+    <button class="btn-reserve" onclick="toggleOrder()">🛒 Order <span class="order-count" id="orderCount">0</span></button>
+    <button class="btn-reserve" style="background:transparent;border:1px solid var(--border);color:var(--warm);" onclick="document.getElementById('reservation').scrollIntoView({behavior:'smooth'})">Reserve Table</button>
+  </div>
 </nav>
 
 <section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-pattern"></div>
-  <div class="hero-glow"></div>
+  <div class="hero-bg-img"></div>
+  <div class="hero-overlay"></div>
   <div class="hero-content">
     <div class="hero-eyebrow"><span class="eyebrow-line"></span><span class="eyebrow-text">Est. 2008 · New Delhi</span><span class="eyebrow-line"></span></div>
-    <h1>Authentic <em>Flavours,</em><br>Crafted with<br><span class="script">Tradition.</span></h1>
-    <p class="hero-desc">Experience the rich heritage of Indian cuisine, prepared with the finest hand-selected spices and time-honoured family recipes passed down through generations.</p>
+    <h1>Authentic <em>Flavours,</em><br>Crafted with<br>Tradition.</h1>
+    <p class="hero-desc">Experience the rich heritage of Indian cuisine, prepared with hand-selected spices and family recipes passed down through generations. Every plate tells a story.</p>
     <div class="hero-actions">
-      <button class="btn-primary">Explore Our Menu</button>
-      <button class="btn-ghost">📞 Order Online</button>
+      <button class="btn-primary" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">Explore Our Menu</button>
+      <button class="btn-ghost" onclick="toggleOrder()">📞 Order Online</button>
     </div>
     <div class="hero-rating">
       <div class="rating-stars">★★★★★</div>
       <div class="rating-text"><strong>4.9/5</strong> from 1,200+ reviews</div>
     </div>
-  </div>
-  <div class="hero-dishes">
-    <div class="dish-card"><div class="dish-emoji">🍛</div><div><div class="dish-name">Butter Chicken</div><div class="dish-price">₹350</div></div></div>
-    <div class="dish-card"><div class="dish-emoji">🍚</div><div><div class="dish-name">Dum Biryani</div><div class="dish-price">₹420</div></div></div>
-    <div class="dish-card"><div class="dish-emoji">🥘</div><div><div class="dish-name">Dal Makhani</div><div class="dish-price">₹280</div></div></div>
   </div>
 </section>
 
@@ -182,65 +219,97 @@
   <div class="stat-item"><div class="stat-num">Daily</div><div class="stat-label">Fresh Ingredients</div></div>
 </div>
 
-<section class="menu-section">
+<section class="menu-section" id="menu">
   <div class="section-header">
     <div class="section-eyebrow">Our Specialities</div>
     <div class="section-title">A Taste of <em>India</em></div>
   </div>
   <div class="menu-tabs">
-    <button class="tab active">All</button>
-    <button class="tab">Starters</button>
-    <button class="tab">Mains</button>
-    <button class="tab">Breads</button>
-    <button class="tab">Desserts</button>
+    <button class="tab active" onclick="setMenuFilter('all',this)">All</button>
+    <button class="tab" onclick="setMenuFilter('starter',this)">Starters</button>
+    <button class="tab" onclick="setMenuFilter('main',this)">Mains</button>
+    <button class="tab" onclick="setMenuFilter('bread',this)">Breads</button>
+    <button class="tab" onclick="setMenuFilter('dessert',this)">Desserts</button>
+    <button class="tab" onclick="setMenuFilter('drink',this)">Drinks</button>
   </div>
-  <div class="menu-grid">
-    <div class="menu-card">
-      <div class="menu-img c1"><span class="veg-badge">Non-Veg</span><span class="spice-level">🌶🌶</span>🍗</div>
-      <div class="menu-info"><div class="menu-name">Butter Chicken</div><div class="menu-desc">Tender chicken in a rich, velvety tomato-butter gravy with aromatic spices. A timeless classic.</div><div class="menu-footer"><div class="menu-price">₹350</div><button class="btn-order">Order Now</button></div></div>
+  <div class="menu-grid" id="menuGrid"></div>
+</section>
+
+<section class="gallery-section" id="gallery">
+  <div class="section-header">
+    <div class="section-eyebrow">Our Restaurant</div>
+    <div class="section-title">A Feast for <em>the Eyes</em></div>
+  </div>
+  <div class="gallery-grid" style="margin-top:3rem;">
+    <div class="gal-img"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80" alt="Restaurant interior"></div>
+    <div class="gal-img"><img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&q=80" alt="Indian food"></div>
+    <div class="gal-img"><img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400&q=80" alt="Curry"></div>
+    <div class="gal-img"><img src="https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=400&q=80" alt="Biryani"></div>
+    <div class="gal-img"><img src="https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=400&q=80" alt="Tandoor"></div>
+  </div>
+</section>
+
+<section class="reservation-section" id="reservation">
+  <div class="res-inner">
+    <div class="res-img">
+      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80" alt="Fine dining">
     </div>
-    <div class="menu-card">
-      <div class="menu-img c2"><span class="veg-badge" style="color:#ffe08e;border-color:rgba(255,200,80,0.5);background:rgba(255,200,30,0.15)">Veg</span><span class="spice-level">🌶🌶🌶</span>🥘</div>
-      <div class="menu-info"><div class="menu-name">Dal Makhani</div><div class="menu-desc">Slow-cooked black lentils simmered overnight in butter and cream. The soul of Punjabi cooking.</div><div class="menu-footer"><div class="menu-price">₹280</div><button class="btn-order">Order Now</button></div></div>
-    </div>
-    <div class="menu-card">
-      <div class="menu-img c3"><span class="spice-level">🌶🌶</span>🍚</div>
-      <div class="menu-info"><div class="menu-name">Chicken Dum Biryani</div><div class="menu-desc">Fragrant basmati rice layered with spiced chicken, slow-cooked in a sealed pot. Served with raita.</div><div class="menu-footer"><div class="menu-price">₹420</div><button class="btn-order">Order Now</button></div></div>
-    </div>
-    <div class="menu-card">
-      <div class="menu-img c4"><span class="veg-badge" style="color:#ffe08e;border-color:rgba(255,200,80,0.5);background:rgba(255,200,30,0.15)">Veg</span><span class="spice-level">🌶</span>🧀</div>
-      <div class="menu-info"><div class="menu-name">Paneer Butter Masala</div><div class="menu-desc">Soft cottage cheese cubes in a luscious onion-tomato gravy, finished with fresh cream.</div><div class="menu-footer"><div class="menu-price">₹320</div><button class="btn-order">Order Now</button></div></div>
+    <div class="res-form-wrap">
+      <div class="form-title">Make a Reservation ✦</div>
+      <div class="form-row">
+        <div class="form-group"><label>Full Name</label><input type="text" id="resName" placeholder="Your name"></div>
+        <div class="form-group"><label>Phone Number</label><input type="tel" id="resPhone" placeholder="+91 XXXXX XXXXX"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Date</label><input type="date" id="resDate"></div>
+        <div class="form-group"><label>Time</label><input type="time" id="resTime" value="19:00"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Guests</label>
+          <select id="resGuests"><option>1 Guest</option><option>2 Guests</option><option selected>3–4 Guests</option><option>5–8 Guests</option><option>9+ (Private Room)</option></select>
+        </div>
+        <div class="form-group"><label>Occasion</label>
+          <select id="resOccasion"><option>Casual Dining</option><option>Birthday</option><option>Anniversary</option><option>Business Lunch</option><option>Other</option></select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group full"><label>Special Requests</label><textarea id="resRequests" rows="3" placeholder="Any dietary requirements, allergies, or special arrangements..."></textarea></div>
+      </div>
+      <button class="btn-submit" onclick="submitReservation()">Confirm Reservation ✦</button>
+      <div class="success-msg" id="successMsg">🎉 Your table has been reserved! We'll WhatsApp you a confirmation shortly.</div>
     </div>
   </div>
 </section>
 
-<section class="reservation-section">
-  <div class="reservation-inner">
-    <div class="res-text">
-      <div class="section-eyebrow" style="justify-content:flex-start">Book a Table</div>
-      <h2>Reserve Your<br><em>Perfect Evening</em></h2>
-      <p>Whether it's a family celebration, a romantic dinner, or a business lunch — we'll make sure every moment is unforgettable.</p>
-      <ul class="res-features">
-        <li>Elegant dining experience for all occasions</li>
-        <li>Private dining room available for groups</li>
-        <li>Live music on weekends</li>
-        <li>Special décor for birthdays & anniversaries</li>
-      </ul>
+<section class="testimonials" id="testimonials">
+  <div class="section-header">
+    <div class="section-eyebrow">Guest Reviews</div>
+    <div class="section-title">What Our <em>Guests Say</em></div>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"The Butter Chicken here is absolutely divine. The spices are perfectly balanced and the naan is so fresh. This is hands down the best Indian restaurant in Delhi."</p>
+      <div class="testi-author">
+        <img class="testi-avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80" alt="Rahul">
+        <div><div class="testi-name">Rahul Mehta</div><div class="testi-loc">📍 Delhi</div></div>
+      </div>
     </div>
-    <div class="res-form">
-      <div class="form-title">Make a Reservation</div>
-      <div class="form-row">
-        <div class="form-group"><label>Full Name</label><input type="text" placeholder="Your name"></div>
-        <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="+91 XXXXX XXXXX"></div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"We celebrated our anniversary here and it was magical. The private dining experience, the live music, the food — everything was absolutely perfect. Will definitely return."</p>
+      <div class="testi-author">
+        <img class="testi-avatar" src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=80&q=80" alt="Priya">
+        <div><div class="testi-name">Priya Sharma</div><div class="testi-loc">📍 Mumbai</div></div>
       </div>
-      <div class="form-row">
-        <div class="form-group"><label>Date</label><input type="date"></div>
-        <div class="form-group"><label>Time</label><input type="time" value="19:00"></div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Their Dum Biryani is unlike anything I've ever tasted. Slow cooked to perfection with the most aromatic spices. The Dal Makhani is also exceptional. Highly recommend!"</p>
+      <div class="testi-author">
+        <img class="testi-avatar" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&q=80" alt="Arjun">
+        <div><div class="testi-name">Arjun Kapoor</div><div class="testi-loc">📍 Bangalore</div></div>
       </div>
-      <div class="form-group" style="margin-bottom:1rem"><label>Number of Guests</label>
-        <select><option>1 Guest</option><option>2 Guests</option><option selected>3–4 Guests</option><option>5–8 Guests</option><option>9+ Guests (Private Dining)</option></select>
-      </div>
-      <button class="btn-submit">Confirm Reservation ✦</button>
     </div>
   </div>
 </section>
@@ -249,13 +318,139 @@
   <div class="footer-inner">
     <div class="footer-brand">
       <span class="logo">Spice Garden</span>
-      <p>Bringing authentic Indian flavours to your table since 2008. Every dish is crafted with passion, tradition, and the finest ingredients.</p>
+      <p>Bringing authentic Indian flavours to your table since 2008. Every dish is crafted with passion, tradition, and the finest ingredients sourced daily.</p>
     </div>
-    <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="#">Our Menu</a></li><li><a href="#">Reservations</a></li><li><a href="#">Order Online</a></li><li><a href="#">Our Story</a></li></ul></div>
-    <div class="footer-col"><h4>Contact</h4><ul><li><a href="#">📍 Connaught Place, Delhi</a></li><li><a href="#">📞 +91 98765 43210</a></li><li><a href="#">💬 WhatsApp Us</a></li><li><a href="#">🕐 12pm – 11pm Daily</a></li></ul></div>
+    <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="#menu">Our Menu</a></li><li><a href="#reservation">Reservations</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#testimonials">Reviews</a></li></ul></div>
+    <div class="footer-col"><h4>Contact Us</h4><ul><li><a href="#">📍 Connaught Place, Delhi</a></li><li><a href="#">📞 +91 98765 43210</a></li><li><a href="https://wa.me/919876543210">💬 WhatsApp Us</a></li><li><a href="#">🕐 12pm – 11pm Daily</a></li></ul></div>
   </div>
   <div class="footer-bottom"><span>© 2025 Spice Garden. All rights reserved.</span><span>Crafted with ❤️ and spice</span></div>
 </footer>
 
+<script>
+const MENU=[
+  {id:1,name:'Butter Chicken',cat:'main',price:350,type:'nonveg',spice:2,emoji:'🍗',img:'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=400&q=80',desc:'Tender chicken in velvety tomato-butter gravy with aromatic spices. A timeless classic.'},
+  {id:2,name:'Dal Makhani',cat:'main',price:280,type:'veg',spice:2,emoji:'🥘',img:'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&q=80',desc:'Slow-cooked black lentils simmered overnight in butter and cream. Soul of Punjabi cooking.'},
+  {id:3,name:'Chicken Dum Biryani',cat:'main',price:420,type:'nonveg',spice:2,emoji:'🍚',img:'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&q=80',desc:'Fragrant basmati layered with spiced chicken, slow-cooked sealed. Served with raita.'},
+  {id:4,name:'Paneer Butter Masala',cat:'main',price:320,type:'veg',spice:1,emoji:'🧀',img:'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400&q=80',desc:'Soft cottage cheese in a luscious onion-tomato gravy, finished with fresh cream.'},
+  {id:5,name:'Chicken Tikka',cat:'starter',price:280,type:'nonveg',spice:2,emoji:'🍢',img:'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400&q=80',desc:'Juicy chicken marinated in yogurt and spices, grilled in our traditional tandoor.'},
+  {id:6,name:'Paneer Tikka',cat:'starter',price:240,type:'veg',spice:1,emoji:'🧆',img:'https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=400&q=80',desc:'Marinated cottage cheese grilled to perfection. Crispy outside, soft and aromatic inside.'},
+  {id:7,name:'Samosa (2 pcs)',cat:'starter',price:80,type:'veg',spice:2,emoji:'🥟',img:'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&q=80',desc:'Crispy golden pastry filled with spiced potatoes and peas. Served with mint chutney.'},
+  {id:8,name:'Butter Naan',cat:'bread',price:60,type:'veg',spice:0,emoji:'🫓',img:'https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&q=80',desc:'Soft leavened bread baked in tandoor, finished with butter. The perfect accompaniment.'},
+  {id:9,name:'Garlic Naan',cat:'bread',price:70,type:'veg',spice:0,emoji:'🧄',img:'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400&q=80',desc:'Naan topped with fresh garlic and coriander, baked to golden perfection.'},
+  {id:10,name:'Gulab Jamun',cat:'dessert',price:120,type:'veg',spice:0,emoji:'🍮',img:'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&q=80',desc:'Soft milk-solid dumplings soaked in rose-flavoured sugar syrup. Served warm.'},
+  {id:11,name:'Mango Lassi',cat:'drink',price:80,type:'veg',spice:0,emoji:'🥭',img:'https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?w=400&q=80',desc:'Thick, creamy yogurt drink blended with fresh Alphonso mangoes. Refreshing and sweet.'},
+  {id:12,name:'Masala Chai',cat:'drink',price:50,type:'veg',spice:1,emoji:'☕',img:'https://images.unsplash.com/photo-1563822249548-9a72b6353cd1?w=400&q=80',desc:'Traditional Indian spiced tea with ginger, cardamom, and cinnamon. Soothing and aromatic.'},
+];
+
+let order=[], menuFilter='all';
+
+function renderMenu(){
+  const grid=document.getElementById('menuGrid');
+  const list=MENU.filter(m=>menuFilter==='all'||m.cat===menuFilter);
+  grid.innerHTML=list.map(m=>`
+    <div class="menu-card">
+      <div class="menu-img-wrap">
+        <img class="menu-img" src="${m.img}" alt="${m.name}" loading="lazy">
+        <span class="veg-badge ${m.type}">${m.type==='veg'?'🟢 Veg':'🔴 Non-Veg'}</span>
+        ${m.spice>0?`<span class="spice-level">${'🌶'.repeat(m.spice)}</span>`:''}
+      </div>
+      <div class="menu-info">
+        <div class="menu-name">${m.emoji} ${m.name}</div>
+        <div class="menu-desc">${m.desc}</div>
+        <div class="menu-footer">
+          <div class="menu-price">₹${m.price}</div>
+          <button class="btn-add-food" id="mbtn${m.id}" onclick="addToOrder(${m.id})">Add to Order</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function setMenuFilter(f,btn){
+  menuFilter=f;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  renderMenu();
+}
+
+function addToOrder(id){
+  const m=MENU.find(x=>x.id===id);
+  const ex=order.find(o=>o.id===id);
+  if(ex)ex.qty++;else order.push({...m,qty:1});
+  updateOrder();
+  showToast('🍛 '+m.name+' added!');
+  const btn=document.getElementById('mbtn'+id);
+  if(btn){btn.classList.add('added');btn.textContent='✅ Added';setTimeout(()=>{btn.classList.remove('added');btn.textContent='Add to Order';},1500);}
+}
+
+function removeFromOrder(id){order=order.filter(o=>o.id!==id);updateOrder();}
+
+function changeOrderQty(id,delta){
+  const item=order.find(o=>o.id===id);
+  if(item){item.qty+=delta;if(item.qty<=0)order=order.filter(o=>o.id!==id);}
+  updateOrder();
+}
+
+function updateOrder(){
+  const total=order.reduce((s,o)=>s+o.qty,0);
+  document.getElementById('orderCount').textContent=total;
+  document.getElementById('orderCountInner').textContent=total;
+  const itemsEl=document.getElementById('orderItems');
+  const footEl=document.getElementById('orderFoot');
+  if(!order.length){
+    itemsEl.innerHTML='<div class="order-empty"><span class="ei">🍛</span>No items yet.<br><span style="font-size:.85rem;">Add dishes from our menu!</span></div>';
+    footEl.style.display='none';return;
+  }
+  footEl.style.display='block';
+  itemsEl.innerHTML=order.map(o=>`
+    <div class="order-item">
+      <div class="oi-emoji">${o.emoji}</div>
+      <div class="oi-info">
+        <div class="oi-name">${o.name}</div>
+        <div class="oi-price">₹${(o.price*o.qty).toLocaleString()}</div>
+        <div class="oi-qty">
+          <button class="q-btn" onclick="changeOrderQty(${o.id},-1)">−</button>
+          <span class="q-num">${o.qty}</span>
+          <button class="q-btn" onclick="changeOrderQty(${o.id},1)">+</button>
+        </div>
+      </div>
+      <button class="oi-remove" onclick="removeFromOrder(${o.id})">🗑️</button>
+    </div>`).join('');
+  const grand=order.reduce((s,o)=>s+o.price*o.qty,0);
+  document.getElementById('orderTotal').textContent='₹'+grand.toLocaleString();
+}
+
+function toggleOrder(){
+  document.getElementById('orderDrawer').classList.toggle('open');
+  document.getElementById('orderOverlay').classList.toggle('open');
+}
+
+function placeOrder(){
+  showToast('🎉 Order placed! We\'ll confirm via WhatsApp shortly.');
+  order=[];updateOrder();toggleOrder();
+}
+
+function submitReservation(){
+  const name=document.getElementById('resName').value.trim();
+  const phone=document.getElementById('resPhone').value.trim();
+  const date=document.getElementById('resDate').value;
+  if(!name||!phone||!date){showToast('⚠️ Please fill in your name, phone and date.');return;}
+  document.getElementById('successMsg').style.display='block';
+  document.getElementById('resName').value='';
+  document.getElementById('resPhone').value='';
+  document.getElementById('resDate').value='';
+  document.getElementById('resRequests').value='';
+  setTimeout(()=>document.getElementById('successMsg').style.display='none',5000);
+}
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+// Set min date to today
+document.getElementById('resDate').min=new Date().toISOString().split('T')[0];
+renderMenu();
+</script>
 </body>
 </html>
